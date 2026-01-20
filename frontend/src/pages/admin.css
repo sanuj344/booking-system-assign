@@ -1,0 +1,34 @@
+.admin-card {
+  margin-top: 10px;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr auto;
+  gap: 20px;
+  align-items: end;
+}
+
+select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: white;
+}
+
+select:focus {
+  outline: none;
+  border-color: #6c4bd9;
+}
+
+.success {
+  margin-top: 15px;
+  color: #16a34a;
+}
+
+.error {
+  margin-top: 15px;
+  color: #dc2626;
+}
