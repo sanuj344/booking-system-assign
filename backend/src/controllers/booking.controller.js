@@ -325,3 +325,29 @@ export const adminOverride = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+/**
+ * GET BOOKING WITH EVENT HISTORY (Observability)
+ */
+export const getBookingWithEvents = async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+
+    const booking = await Booking.findById(bookingId);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    const events = await BookingEvent.find({ bookingId })
+      .sort({ createdAt: 1 }); // chronological order
+
+    return res.json({
+      booking,
+      events,
+    });
+  } catch (error) {
+    console.error("Get booking history error:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};

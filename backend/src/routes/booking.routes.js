@@ -8,7 +8,9 @@ import {
   cancelBooking,
   markNoShow,
   adminOverride,
+  getBookingWithEvents,
 } from "../controllers/booking.controller.js";
+
 
 const router = express.Router();
 
@@ -32,5 +34,7 @@ router.post("/:bookingId/no-show", markNoShow);
 
 // Admin
 router.post("/:bookingId/override", adminOverride);
+// Booking details + event history
+router.get("/:bookingId", getBookingWithEvents);
 
 export default router;
