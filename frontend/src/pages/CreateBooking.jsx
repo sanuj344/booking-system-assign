@@ -1,5 +1,6 @@
 import { useState } from "react";
 import API from "../api/bookingApi";
+import "./form.css";
 
 export default function CreateBooking() {
   const [form, setForm] = useState({
@@ -10,6 +11,10 @@ export default function CreateBooking() {
 
   const [bookingId, setBookingId] = useState("");
 
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await API.post("/", form);
@@ -17,17 +22,31 @@ export default function CreateBooking() {
   };
 
   return (
-    <div>
-      <h2>Create Booking</h2>
+    <>
+      <h1>Create Booking</h1>
 
-      <form onSubmit={handleSubmit}>
-        <input placeholder="Customer ID" onChange={(e) => setForm({ ...form, customerId: e.target.value })} />
-        <input placeholder="Service Type" onChange={(e) => setForm({ ...form, serviceType: e.target.value })} />
-        <input placeholder="Address" onChange={(e) => setForm({ ...form, address: e.target.value })} />
-        <button type="submit">Create</button>
-      </form>
+      <div className="card">
+        <form onSubmit={handleSubmit} className="form-row">
+          <div>
+            <label>Customer ID</label>
+            <input name="customerId" placeholder="Customer ID" onChange={handleChange} />
+          </div>
 
-      {bookingId && <p>Booking ID: {bookingId}</p>}
-    </div>
+          <div>
+            <label>Service Type</label>
+            <input name="serviceType" placeholder="Service Type" onChange={handleChange} />
+          </div>
+
+          <div>
+            <label>Address</label>
+            <input name="address" placeholder="Address" onChange={handleChange} />
+          </div>
+
+          <button>Create</button>
+        </form>
+      </div>
+
+      {bookingId && <p className="success">Booking ID: {bookingId}</p>}
+    </>
   );
 }

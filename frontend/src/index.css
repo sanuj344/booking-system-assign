@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f2f3ff, #e6e9ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1100px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px 40px 50px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+}
+
+.tabs {
+  display: flex;
+  gap: 32px;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.tab {
+  text-decoration: none;
+  color: #6b7280;
+  font-weight: 500;
+  padding-bottom: 6px;
+}
+
+.tab:hover {
+  color: #6c4bd9;
+}
+
+.tab.active {
+  color: #6c4bd9;
+  border-bottom: 3px solid #6c4bd9;
+}
+
