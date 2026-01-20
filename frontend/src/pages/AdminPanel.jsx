@@ -46,6 +46,10 @@ export default function AdminPanel() {
     <>
       <h1>Admin Panel</h1>
 
+      <p style={{ color: "#6b7280", marginBottom: "10px" }}>
+        Admin overrides should be used only in exceptional cases.
+      </p>
+
       <div className="card admin-card">
         <div className="admin-row">
           <div>

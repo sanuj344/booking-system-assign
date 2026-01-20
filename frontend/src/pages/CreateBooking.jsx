@@ -10,6 +10,8 @@ export default function CreateBooking() {
   });
 
   const [bookingId, setBookingId] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -17,8 +19,18 @@ export default function CreateBooking() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await API.post("/", form);
-    setBookingId(res.data.booking._id);
+    try {
+      setLoading(true);
+      setError("");
+      setBookingId("");
+
+      const res = await API.post("/", form);
+      setBookingId(res.data.booking._id);
+    } catch (err) {
+      setError("Failed to create booking");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -29,24 +41,42 @@ export default function CreateBooking() {
         <form onSubmit={handleSubmit} className="form-row">
           <div>
             <label>Customer ID</label>
-            <input name="customerId" placeholder="Customer ID" onChange={handleChange} />
+            <input
+              name="customerId"
+              placeholder="Customer ID"
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <div>
             <label>Service Type</label>
-            <input name="serviceType" placeholder="Service Type" onChange={handleChange} />
+            <input
+              name="serviceType"
+              placeholder="Service Type"
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <div>
             <label>Address</label>
-            <input name="address" placeholder="Address" onChange={handleChange} />
+            <input
+              name="address"
+              placeholder="Address"
+              onChange={handleChange}
+              required
+            />
           </div>
 
-          <button>Create</button>
+          <button disabled={loading}>
+            {loading ? "Creating..." : "Create"}
+          </button>
         </form>
       </div>
 
       {bookingId && <p className="success">Booking ID: {bookingId}</p>}
+      {error && <p className="error">{error}</p>}
     </>
   );
 }

@@ -9,14 +9,17 @@ export default function BookingDetails() {
   const [error, setError] = useState("");
 
   const fetchBooking = async () => {
+    if (!bookingId) return;
+
     try {
       setLoading(true);
       setError("");
+      setData(null);
+
       const res = await API.get(`/${bookingId}`);
       setData(res.data);
     } catch (err) {
       setError("Booking not found");
-      setData(null);
     } finally {
       setLoading(false);
     }
@@ -32,8 +35,16 @@ export default function BookingDetails() {
           value={bookingId}
           onChange={(e) => setBookingId(e.target.value)}
         />
-        <button onClick={fetchBooking}>Fetch</button>
+        <button onClick={fetchBooking} disabled={loading}>
+          {loading ? "Fetching..." : "Fetch"}
+        </button>
       </div>
+
+      {!data && !loading && !error && (
+        <p style={{ marginTop: "20px", color: "#6b7280" }}>
+          Enter a booking ID to view details
+        </p>
+      )}
 
       {loading && <p>Loading...</p>}
       {error && <p className="error">{error}</p>}
