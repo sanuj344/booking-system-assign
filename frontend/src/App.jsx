@@ -3,6 +3,7 @@ import CreateBooking from "./pages/createBooking";
 import BookingDetails from "./pages/BookingDetails";
 import AdminPanel from "./pages/AdminPanel";
 
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -17,12 +18,16 @@ export default function App() {
   <NavLink to="/admin" className="tab">
     Admin
   </NavLink>
+  
+
 </nav>
 
         <Routes>
           <Route path="/" element={<CreateBooking />} />
           <Route path="/booking" element={<BookingDetails />} />
           <Route path="/admin" element={<AdminPanel />} />
+        
+
         </Routes>
       </div>
     </BrowserRouter>
